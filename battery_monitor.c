@@ -6,7 +6,6 @@
 #include <utmpx.h>
 #include <fcntl.h>
 
-void print_battery_info(battery_t *battery);
 char* get_user();
 void notify_low_battery(int percentage);
 int battery_capacity(battery_t battery);
@@ -43,7 +42,6 @@ int main(int argc, char* argv[])
         }
 
         int percentage = battery_capacity(battery);
-
         // recommended percentage to prolong the battery life span
         if (percentage < 21) {
            notify_low_battery(percentage); 
