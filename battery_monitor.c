@@ -53,6 +53,17 @@ int battery_percentage(int battery_index, battery_t battery)
 	return atoi(buffer);
 }
 
+int *all_battery_percentage(int *battery_count)
+{
+	battery_t *batteries = list_batteries(battery_count);
+	int *percentage = (int *)malloc(*battery_count * sizeof(int));
+	for (int i = 0; i < *battery_count; i++) {
+		battery_t battery = batteries[i];
+		percentage[i] = battery_percentage(i, battery);
+	}
+	return percentage;
+}
+
 int is_discharging(battery_t battery)
 {
 	char status[20];
