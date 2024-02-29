@@ -7,6 +7,7 @@
 
 void print_battery_info();
 void print_battery_info_json();
+char *resize_string(int extended_size, char *str);
 void loop_battery_monitor();
 
 int main(int argc, char *argv[])
@@ -73,10 +74,7 @@ void print_battery_info_json()
 	for (int i = 0; i < count; i++) {
 		if (strlen(json) + 64 >= json_size) {
 			json_size *= 2;
-			char *temp_json = malloc(json_size * sizeof(char));
-			strcpy(temp_json, json);
-			free(json);
-			json = temp_json;
+			json = resize_string(json_size, json);
 		}
 		strcat(json, inner_template);
 		sprintf(json, json, i, percentage[i]);
@@ -84,13 +82,18 @@ void print_battery_info_json()
 	}
 	if (strlen(json) + strlen(main_template) >= json_size) {
 		json_size *= 2;
-		char *temp_json = malloc(json_size * sizeof(char));
-		strcpy(temp_json, json);
-		free(json);
-		json = temp_json;
+		json = resize_string(json_size, json);
 	}
 	printf(main_template, json);
 	free(json);
+}
+
+char *resize_string(int extended_size, char *str)
+{
+	char *temp = malloc(extended_size * sizeof(char));
+	strcpy(temp, str);
+	free(str);
+	return temp;
 }
 
 void loop_battery_monitor()
