@@ -44,25 +44,52 @@ void print_battery_info()
 	}
 }
 
+/*
+ * Generates a JSON output with the following format
+ *
+ * {
+ *    "batteries":[
+ *       {
+ *          "battery_0":"100%"
+ *       },
+ *       {
+ *          "battery_1":"90%"
+ *       }
+ *    ]
+ * }
+ */
 void print_battery_info_json()
 {
 	int count = 0;
 	int *percentage = all_battery_percentage(&count);
-	for (int i = 0; i < count; i++) {
-		/*
-		   {
-		   "batteries": [
-		   {
-		   "battery_0": "100%"
-		   },
-		   {
-		   "battery_1": "90%"
-		   }
-		   ]
-		   }
-		 */
-		puts("To implement");
+    const char *main_template = "{\n   \"batteries\":[\n%s   ]\n}\n";
+    const char *inner_template = "      {\n         \"BATTERY_%d\":\"%d%%\"\n      }";
+    
+    int json_size = 64;
+    char *json = malloc(json_size * sizeof(char));
+    strcpy(json, "");
+    
+    for (int i = 0; i < count; i++) {
+        if (strlen(json) + 64 >= json_size) {
+            json_size *= 2;
+            char *temp_json = malloc(json_size * sizeof(char));
+            strcpy(temp_json, json);
+            free(json);
+            json = temp_json;
+        }
+        strcat(json, inner_template);
+        sprintf(json, json, i, percentage[i]);
+        strcat(json, i + 1 < count ? ",\n" : "\n");
 	}
+    if (strlen(json) + strlen(main_template) >= json_size) {
+        json_size *= 2;
+        char *temp_json = malloc(json_size * sizeof(char));
+        strcpy(temp_json, json);
+        free(json);
+        json = temp_json;
+    }
+    printf(main_template, json);
+    free(json);
 }
 
 void loop_battery_monitor()
