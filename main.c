@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include "battery_monitor.h"
 #include "notification.h"
+#include "parser.h"
 
 void print_battery_info();
 void print_battery_info_json();
@@ -12,25 +13,18 @@ void loop_battery_monitor();
 
 int main(int argc, char *argv[])
 {
-	if (argc == 1) {
+	switch (parse(argc, argv)) {
+	case BATTERY_INFO:
 		print_battery_info();
-		return EXIT_SUCCESS;
-	}
-	for (int i = 1; i < argc; i++) {
-		if (strcmp("-s", argv[i]) == 0
-		    || strcmp("--status", argv[i]) == 0) {
-			print_battery_info();
-			return EXIT_SUCCESS;
-		}
-		if (strcmp("-j", argv[i]) == 0
-		    || strcmp("--json", argv[i]) == 0) {
-			print_battery_info_json();
-			return EXIT_SUCCESS;
-		}
-		if (strcmp("-m", argv[i]) == 0
-		    || strcmp("--monitor", argv[i]) == 0) {
-			loop_battery_monitor();
-		}
+		break;
+	case BATTERY_INFO_JSON:
+		print_battery_info_json();
+		break;
+	case MONITOR:
+		loop_battery_monitor();
+		break;
+	case HELP:
+	default:
 		puts("Print help: to implement");
 	}
 	return EXIT_SUCCESS;
