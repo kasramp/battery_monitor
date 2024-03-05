@@ -1,16 +1,7 @@
 #include <string.h>
 #include "parser.h"
 
-/*
-typedef enum {
-    BATTERY_INFO,
-    BATTERY_INFO_JSON,
-    MONITOR,
-    HELP
-} command
-*/
-
-command parse(int argc, char *argv[])
+command parse(int argc, char *argv[], int *unknown_index)
 {
 	if (argc == 1) {
 		return BATTERY_INFO;
@@ -19,18 +10,18 @@ command parse(int argc, char *argv[])
 		if (strcmp("-s", argv[i]) == 0
 		    || strcmp("--status", argv[i]) == 0) {
 			return BATTERY_INFO;
-		}
-		if (strcmp("-j", argv[i]) == 0
-		    || strcmp("--json", argv[i]) == 0) {
+		} else if (strcmp("-j", argv[i]) == 0
+			   || strcmp("--json", argv[i]) == 0) {
 			return BATTERY_INFO_JSON;
-		}
-		if (strcmp("-m", argv[i]) == 0
-		    || strcmp("--monitor", argv[i]) == 0) {
+		} else if (strcmp("-m", argv[i]) == 0
+			   || strcmp("--monitor", argv[i]) == 0) {
 			return MONITOR;
-		}
-		if (strcmp("-h", argv[i]) == 0
-		    || strcmp("--help", argv[i]) == 0) {
+		} else if (strcmp("-h", argv[i]) == 0
+			   || strcmp("--help", argv[i]) == 0) {
 			return HELP;
+		} else {
+			*unknown_index = i;
+			return UNKNOWN;
 		}
 	}
 	return HELP;

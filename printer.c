@@ -58,6 +58,22 @@ void print_battery_info_json()
 	free(json);
 }
 
+void print_help()
+{
+	puts("Usage: battery_monitor [options]");
+	puts("Options:");
+	puts("  -s, --status                    Print battery status");
+	puts("  -j, --json                      Print battery status in JSON format");
+	puts("  -m, --monitor                   Monitor the battery and send notification to all user's open tty when battery is below 22%");
+	puts("  -h, --help                      Print this message and exit");
+}
+
+void print_unknown_command(char *unknown_command)
+{
+	printf("battery_monitor: unrecognized option '%s'\n", unknown_command);
+	print_help();
+}
+
 static char *resize_string(int extended_size, char *str)
 {
 	char *temp = malloc(extended_size * sizeof(char));

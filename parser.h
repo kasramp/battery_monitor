@@ -5,9 +5,10 @@ typedef enum {
 	BATTERY_INFO,
 	BATTERY_INFO_JSON,
 	MONITOR,
-	HELP
+	HELP,
+	UNKNOWN
 } command;
 
-command parse(int argc, char *argv[]);
+command parse(int argc, char *argv[], int *unknown_index);
 
 #endif
