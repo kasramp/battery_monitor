@@ -35,7 +35,7 @@ void print_battery_info_json()
 	int *percentage = all_battery_percentage(&count);
 	const char *main_template = "{\n   \"batteries\":[\n%s   ]\n}\n";
 	const char *inner_template =
-	    "      {\n         \"BATTERY_%d\":\"%d%%\"\n      }";
+	    "      {\n         \"battery_%d\":\"%d%%\"\n      }";
 
 	int json_size = 64;
 	char *json = malloc(json_size * sizeof(char));
