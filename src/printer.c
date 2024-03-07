@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "battery_monitor.h"
-#include "printer.h"
+#include "inc/battery_monitor.h"
+#include "inc/printer.h"
 
 static char *resize_string(int extended_size, char *str);
 
@@ -37,7 +37,7 @@ void print_battery_info_json()
 	const char *inner_template =
 	    "      {\n         \"battery_%d\":\"%d%%\"\n      }";
 
-	int json_size = 64;
+	long unsigned int json_size = 64L;
 	char *json = malloc(json_size * sizeof(char));
 	strcpy(json, "");
 

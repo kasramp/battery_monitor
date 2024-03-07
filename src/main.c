@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "battery_monitor.h"
-#include "parser.h"
-#include "printer.h"
+#include "inc/battery_monitor.h"
+#include "inc/parser.h"
+#include "inc/printer.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
 		break;
 	case HELP:
 		print_help();
+		break;
 	case UNKNOWN:
 		print_unknown_command(argv[unknown_index]);
 	}
