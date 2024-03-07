@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-Isrc/inc -Wall -Wextra
-DEPS = $(wildcar src/inc/*.h)
+DEPS = $(wildcard src/inc/*.h)
 LDLIBS = -lacpi
 CLEANUP = rm -f
 
@@ -12,12 +12,12 @@ pre-build:
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-battery_monitor_make: src/main.o src/battery_monitor.o src/notification.o src/parser.o src/printer.o
+battery_monitor_make: $(patsubst src/%.c, src/%.o, $(wildcard src/*.c))
 	$(CC) -o battery_monitor $^ $(LDLIBS)
 
 format:
-	indent -linux src/*.c src/*.h
-	rm -f *~
+	indent -linux src/*.c src/inc/*.h
+	rm -f src/*~ src/inc/*~
 	@echo "The code is formatted!"
 
 clean:
