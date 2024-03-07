@@ -4,8 +4,8 @@
 #include <unistd.h>
 #include <utmpx.h>
 #include <fcntl.h>
-#include "battery_monitor.h"
-#include "notification.h"
+#include "inc/battery_monitor.h"
+#include "inc/notification.h"
 
 static void battery_status(battery_t battery, char *status);
 

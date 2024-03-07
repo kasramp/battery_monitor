@@ -1,5 +1,5 @@
 #include <string.h>
-#include "parser.h"
+#include "inc/parser.h"
 
 command parse(int argc, char *argv[], int *unknown_index)
 {

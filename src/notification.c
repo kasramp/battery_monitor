@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <utmpx.h>
 #include <fcntl.h>
-#include "notification.h"
+#include "inc/notification.h"
 
 static const int MAX_USER_LENGTH = 32;
 
