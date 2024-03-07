@@ -1,6 +1,6 @@
 CC=gcc
-CFLAGS=-I.
-DEPS = battery_monitor.h notification.h parser.h printer.h
+CFLAGS=-Isrc/inc -Wall -Wextra
+DEPS = $(wildcar src/inc/*.h)
 LDLIBS = -lacpi
 CLEANUP = rm -f
 
@@ -12,14 +12,14 @@ pre-build:
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-battery_monitor_make: main.o battery_monitor.o notification.o parser.o printer.o
-	$(CC) -o battery_monitor main.o battery_monitor.o notification.o parser.o printer.o $(LDLIBS)
+battery_monitor_make: src/main.o src/battery_monitor.o src/notification.o src/parser.o src/printer.o
+	$(CC) -o battery_monitor $^ $(LDLIBS)
 
 format:
-	indent -linux *.c *.h
+	indent -linux src/*.c src/*.h
 	rm -f *~
 	@echo "The code is formatted!"
 
 clean:
-	rm -f *.o battery_monitor
+	rm -f src/*.o battery_monitor
 	@echo "The project is cleaned!"
