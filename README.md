@@ -17,3 +17,13 @@ The project uses Linux code formatting. To format the code automatically, ensure
 ```bash
 $ make format
 ```
+
+## Man page
+
+After changing the man page content, run,
+
+```bash
+$ cd man && man -l battery_monitor.1
+```
+
+To ensure the man page format is correct.
