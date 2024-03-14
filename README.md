@@ -1,6 +1,8 @@
 # Battery Monitor
 
-A command line utility to monitor the battery status and notify the user in all open `tty` sessions about the low battery status. 
+A command line utility to monitor the battery status and notify the user in all open `tty` sessions about the low battery status.
+
+![demo](https://raw.githubusercontent.com/kasramp/battery_monitor/master/assets/demo.gif)
 
 ## Build
 
