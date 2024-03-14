@@ -12,6 +12,24 @@ Make sure you have `libacpi` installed. Then run:
 $ make
 ```
 
+## Installation
+
+After running the build, run:
+
+```bash
+$ sudo make install
+```
+
+That installs the `battery_monitor` utility on your device.
+
+## Removal
+
+To uninstall the programm, run:
+
+```bash
+$ sudo make uninstall
+```
+
 ## Format
 
 The project uses Linux code formatting. To format the code automatically, ensure `indent` is installed. Then run,
