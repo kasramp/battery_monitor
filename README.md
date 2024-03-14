@@ -30,7 +30,7 @@ To uninstall the programm, run:
 $ sudo make uninstall
 ```
 
-## Format
+## Code Format
 
 The project uses Linux code formatting. To format the code automatically, ensure `indent` is installed. Then run,
 
