@@ -6,7 +6,13 @@ A command line utility to monitor the battery status and notify the user in all 
 
 ## Build
 
-Make sure you have `libacpi` installed. Then run:
+Make sure you have `libacpi` installed. 
+
+```bash
+$ sudo apt install libacpi-dev libacpi0
+```
+
+Then run:
 
 ```bash
 $ make
