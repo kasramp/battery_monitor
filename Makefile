@@ -2,6 +2,7 @@ CC=gcc
 CFLAGS=-Isrc/inc -Wall -Wextra
 DEPS = $(wildcard src/inc/*.h)
 LDLIBS = -lacpi
+STATIC_LIBS = -Wl,-Bstatic -lacpi -Wl,-Bdynamic
 CLEANUP = rm -f
 
 all: pre-build battery_monitor_make
@@ -14,6 +15,9 @@ pre-build:
 
 battery_monitor_make: $(patsubst src/%.c, src/%.o, $(wildcard src/*.c))
 	$(CC) -o battery_monitor $^ $(LDLIBS)
+
+static: $(patsubst src/%.c, src/%.o, $(wildcard src/*.c))
+	$(CC) -o battery_monitor $^ $(STATIC_LIBS)
 
 install:
 	@echo "Installing battery monitor"
