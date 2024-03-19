@@ -1,0 +1,38 @@
+name: Build and Release
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install ACPI
+        shell: bash
+        run: |
+          sudo apt install -y libacpi-dev libacpi0
+      - name: Build
+        shell: bash
+        run: |
+          make clean
+          make all
+      - name: Generate artifact
+        id: artifact
+        shell: bash
+        run: |
+          make clean
+          make static
+          echo "TAGGED_VERSION=$(date '+%F')" >> $GITHUB_OUTPUT
+      - name: Perform release
+        uses: ncipollo/release-action@v1.14.0
+        if: ${{ github.ref == 'refs/heads/master' }}
+        with:
+          tag: ${{ steps.artifact.outputs.TAGGED_VERSION }}
+          generateReleaseNotes: true
+          artifacts: "battery_monitor"
