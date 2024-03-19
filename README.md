@@ -18,6 +18,17 @@ Then run:
 $ make
 ```
 
+## Download
+
+If you want to quickly test the utility without compiling, or have a portable version, go to [the release page](https://github.com/kasramp/battery_monitor/releases) and download the latest version. 
+After that, give the +x permission to the downloaded file,
+
+```bash
+$ chmod +x battery_monitor
+```
+
+Keep in mind that the executable is only for `x86_64` platform. For other architecture, you need to build manually. See the next step.
+
 ## Installation
 
 After running the build, run:
