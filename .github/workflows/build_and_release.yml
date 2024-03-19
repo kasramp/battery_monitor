@@ -30,7 +30,7 @@ jobs:
           make static
           echo "TAGGED_VERSION=$(date '+%F')" >> $GITHUB_OUTPUT
       - name: Perform release
-        uses: ncipollo/release-action@v1.14.0
+        uses: ncipollo/release-action@v1
         if: ${{ github.ref == 'refs/heads/master' }}
         with:
           tag: ${{ steps.artifact.outputs.TAGGED_VERSION }}
